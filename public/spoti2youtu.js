@@ -1,3 +1,5 @@
+console.log('Script loaded successfully.');
+
 // Set up Youtube and Spotify API
 const youtubeApiKey = 'MY_YOUTUBE_API_KEY';
 const spotifyClientId = 'MY_SPOTIFY_CLIENT_ID';
