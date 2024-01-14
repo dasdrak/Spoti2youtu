@@ -1,4 +1,4 @@
-require('dotenv').config();
+//imports
 const { google } = require('googleapis');
 const SpotifyWebApi = require('spotify-web-api-node');
 
