@@ -1,8 +1,8 @@
 // Set up Youtube and Spotify API
-const youtubeApiKey = process.env.YOUTUBE_API_KEY;
-const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
-const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-const spotifyRedirectUri = process.env.SPOTIFY_REDIRECT_URI;
+const youtubeApiKey = 'MY_YOUTUBE_API_KEY';
+const spotifyClientId = 'MY_SPOTIFY_CLIENT_ID';
+const spotifyClientSecret = 'MY_SPOTIFY_CLIENT_SECRET';
+const spotifyRedirectUri = 'MY_SPOTIFY_REDIRECT_URI';
 
 // Function to check if a given URL is from YouTube or Spotify
 function getPlatformAndType(url) {
