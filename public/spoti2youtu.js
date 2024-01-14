@@ -1,4 +1,4 @@
-console.log('Script loaded successfully.');
+console.log('Inside spoti2youtu.js');
 
 // Set up Youtube and Spotify API
 const youtubeApiKey = 'MY_YOUTUBE_API_KEY';
@@ -169,6 +169,7 @@ async function handleSpotifyPlaylistOrTrack(playlistUrl) {
 }
 // Function to convert playlist based on provided URL
 async function convertPlaylist() {
+    console.log('convertPlaylist function called');
     const playlistUrl = document.getElementById('playlistUrl').value;
 
     console.log(`Button pressed with URL: ${playlistUrl}`);
@@ -179,8 +180,10 @@ async function convertPlaylist() {
         const { platform, type } = getPlatformAndType(playlistUrl);
 
         if (platform === 'youtube' && type === 'playlist') {
+             console.log('Handling YouTube playlist...');
             await handleYouTubePlaylist(playlistUrl);
         } else if (platform === 'spotify' && (type === 'playlist' || type === 'track')) {
+            console.log('Handling Spotify playlist or track...');
             await handleSpotifyPlaylistOrTrack(playlistUrl);
         } else {
             console.error('Invalid URL or unsupported platform/type');
