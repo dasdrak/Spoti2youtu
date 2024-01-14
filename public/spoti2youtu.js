@@ -164,25 +164,23 @@ async function handleSpotifyPlaylistOrTrack(playlistUrl) {
         console.error('Error handling Spotify playlist or track:', error);
     }
 }
-
 // Function to convert playlist based on provided URL
 async function convertPlaylist() {
     const playlistUrl = document.getElementById('playlistUrl').value;
-    const resultContainer = document.getElementById('conversionResult');
 
     if (playlistUrl) {
+        console.log(`Button pressed with URL: ${playlistUrl}`);
+
         const { platform, type } = getPlatformAndType(playlistUrl);
 
         if (platform === 'youtube' && type === 'playlist') {
-            const youtubePlaylistId = await handleYouTubePlaylist(playlistUrl);
-            resultContainer.textContent = `Playlist successfully created on YouTube: https://www.youtube.com/playlist?list=${youtubePlaylistId}`;
+            await handleYouTubePlaylist(playlistUrl);
         } else if (platform === 'spotify' && (type === 'playlist' || type === 'track')) {
-            const spotifyPlaylistUrl = await handleSpotifyPlaylistOrTrack(playlistUrl);
-            resultContainer.textContent = `Playlist successfully created on Spotify: ${spotifyPlaylistUrl}`;
+            await handleSpotifyPlaylistOrTrack(playlistUrl);
         } else {
-            resultContainer.textContent = 'Invalid URL or unsupported platform/type';
+            console.error('Invalid URL or unsupported platform/type');
         }
     } else {
-        resultContainer.textContent = 'Please enter a playlist URL';
+        console.error('Please enter a playlist URL');
     }
 }
