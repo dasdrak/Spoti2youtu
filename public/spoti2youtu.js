@@ -169,26 +169,32 @@ async function handleSpotifyPlaylistOrTrack(playlistUrl) {
 }
 // Function to convert playlist based on provided URL
 async function convertPlaylist() {
-    console.log('convertPlaylist function called');
-    const playlistUrl = document.getElementById('playlistUrl').value;
+    try {
+        console.log('convertPlaylist function called');
 
-    console.log(`Button pressed with URL: ${playlistUrl}`);
+        const playlistUrl = document.getElementById('playlistUrl').value;
+        console.log('Playlist URL:', playlistUrl);
 
-    if (playlistUrl) {
-        
+        if (playlistUrl) {
+            const { platform, type } = getPlatformAndType(playlistUrl);
+            console.log('Platform:', platform, 'Type:', type);
 
-        const { platform, type } = getPlatformAndType(playlistUrl);
-
-        if (platform === 'youtube' && type === 'playlist') {
-             console.log('Handling YouTube playlist...');
-            await handleYouTubePlaylist(playlistUrl);
-        } else if (platform === 'spotify' && (type === 'playlist' || type === 'track')) {
-            console.log('Handling Spotify playlist or track...');
-            await handleSpotifyPlaylistOrTrack(playlistUrl);
+            if (platform === 'youtube' && type === 'playlist') {
+                console.log('Handling YouTube playlist...');
+                await handleYouTubePlaylist(playlistUrl);
+                console.log('YouTube playlist handled.');
+            } else if (platform === 'spotify' && (type === 'playlist' || type === 'track')) {
+                console.log('Handling Spotify playlist or track...');
+                await handleSpotifyPlaylistOrTrack(playlistUrl);
+                console.log('Spotify playlist or track handled.');
+            } else {
+                console.error('Invalid URL or unsupported platform/type');
+            }
         } else {
-            console.error('Invalid URL or unsupported platform/type');
+            console.error('Please enter a playlist URL');
         }
-    } else {
-        console.error('Please enter a playlist URL');
+    } catch (error) {
+        console.error('Error in convertPlaylist:', error);
     }
 }
+
