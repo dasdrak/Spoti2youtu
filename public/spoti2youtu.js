@@ -43,14 +43,6 @@ async function createSpotifyPlaylist(playlistName, tracks) {
 // Function to create a YouTube playlist with given video titles
 async function createYouTubePlaylist(playlistName, videoTitles) {
     try {
-        // Authenticate with the YouTube Data API (you should have the API key set up)
-        // const youtubeApiKey = 'YOUR_YOUTUBE_API_KEY';
-        // const youtube = google.youtube({ version: 'v3', auth: youtubeApiKey });
-
-        // Placeholder code for demonstration, replace with actual API key
-        const youtubeApiKey = process.env.YOUTUBE_API_KEY;
-        const youtube = google.youtube({ version: 'v3', auth: youtubeApiKey });
-
         // Create a new playlist
         const createPlaylistResponse = await youtube.playlists.insert({
             part: 'snippet,status',
@@ -168,8 +160,10 @@ async function handleSpotifyPlaylistOrTrack(playlistUrl) {
 async function convertPlaylist() {
     const playlistUrl = document.getElementById('playlistUrl').value;
 
+    console.log(`Button pressed with URL: ${playlistUrl}`);
+
     if (playlistUrl) {
-        console.log(`Button pressed with URL: ${playlistUrl}`);
+        
 
         const { platform, type } = getPlatformAndType(playlistUrl);
 
