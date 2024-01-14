@@ -1,23 +1,8 @@
-//imports
-const { google } = require('googleapis');
-const SpotifyWebApi = require('spotify-web-api-node');
-
 // Set up Youtube and Spotify API
 const youtubeApiKey = process.env.YOUTUBE_API_KEY;
 const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
 const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const spotifyRedirectUri = process.env.SPOTIFY_REDIRECT_URI;
-
-const youtube = google.youtube({
-    version: 'v3',
-    auth: youtubeApiKey,
-});
-
-const spotifyApi = new SpotifyWebApi({
-    clientId: spotifyClientId,
-    clientSecret: spotifyClientSecret,
-    redirectUri: spotifyRedirectUri,
-});
 
 // Function to check if a given URL is from YouTube or Spotify
 function getPlatformAndType(url) {
@@ -183,18 +168,21 @@ async function handleSpotifyPlaylistOrTrack(playlistUrl) {
 // Function to convert playlist based on provided URL
 async function convertPlaylist() {
     const playlistUrl = document.getElementById('playlistUrl').value;
+    const resultContainer = document.getElementById('conversionResult');
 
     if (playlistUrl) {
         const { platform, type } = getPlatformAndType(playlistUrl);
 
         if (platform === 'youtube' && type === 'playlist') {
-            await handleYouTubePlaylist(playlistUrl);
+            const youtubePlaylistId = await handleYouTubePlaylist(playlistUrl);
+            resultContainer.textContent = `Playlist successfully created on YouTube: https://www.youtube.com/playlist?list=${youtubePlaylistId}`;
         } else if (platform === 'spotify' && (type === 'playlist' || type === 'track')) {
-            await handleSpotifyPlaylistOrTrack(playlistUrl);
+            const spotifyPlaylistUrl = await handleSpotifyPlaylistOrTrack(playlistUrl);
+            resultContainer.textContent = `Playlist successfully created on Spotify: ${spotifyPlaylistUrl}`;
         } else {
-            console.error('Invalid URL or unsupported platform/type');
+            resultContainer.textContent = 'Invalid URL or unsupported platform/type';
         }
     } else {
-        console.error('Please enter a playlist URL');
+        resultContainer.textContent = 'Please enter a playlist URL';
     }
 }
