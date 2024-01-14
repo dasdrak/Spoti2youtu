@@ -1,0 +1,25 @@
+{
+  "name": "spoti2youtu",
+  "version": "1.0.0",
+  "description": "Quick an easy way to export spotify playlists to youtube and viceversa",
+  "main": "spoti2youtu.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dasdrak/Spoti2youtu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dasdrak/Spoti2youtu/issues"
+  },
+  "homepage": "https://github.com/dasdrak/Spoti2youtu#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "googleapis": "^130.0.0",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}
