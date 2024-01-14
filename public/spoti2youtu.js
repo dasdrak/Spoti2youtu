@@ -13,7 +13,17 @@ const spotifyApi = new SpotifyWebApi({
     clientSecret: spotifyClientSecret,
     redirectUri: spotifyRedirectUri,
 });
+// Check if the Spotify API is authenticated
+console.log('Is Spotify API authenticated:', spotifyApi.getAccessToken() !== null);
 
+// Initialize YouTube API
+const youtubeApi = new gapi.client.youtube({
+    apiKey: youtubeApiKey,
+    discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"],
+});
+
+// Check if the YouTube API is authenticated
+console.log('Is YouTube API authenticated:', gapi.auth2.getAuthInstance().isSignedIn.get());
 
 // Function to check if a given URL is from YouTube or Spotify
 function getPlatformAndType(url) {
