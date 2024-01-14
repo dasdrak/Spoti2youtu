@@ -4,6 +4,15 @@ const spotifyClientId = 'MY_SPOTIFY_CLIENT_ID';
 const spotifyClientSecret = 'MY_SPOTIFY_CLIENT_SECRET';
 const spotifyRedirectUri = 'MY_SPOTIFY_REDIRECT_URI';
 
+// Initialize Spotify API
+
+const spotifyApi = new SpotifyWebApi({
+    clientId: spotifyClientId,
+    clientSecret: spotifyClientSecret,
+    redirectUri: spotifyRedirectUri,
+});
+
+
 // Function to check if a given URL is from YouTube or Spotify
 function getPlatformAndType(url) {
     if (url.includes('youtu')) {
