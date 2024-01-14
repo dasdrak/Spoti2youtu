@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playlist Converter</title>
     <!-- Include the SpotifyWebApi script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/spotify-web-api-js/1.5.2/spotify-web-api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/spotify-web-api-node@5.1.0/dist/spotify-web-api-node.js"></script>
     <!-- Include the googleapis script -->
     <script src="https://apis.google.com/js/api.js"></script>
-    <!-- Include your main script using ECMAScript modules -->
     <script type="module" src="public/spoti2youtu.js"></script>
 </head>
 
@@ -18,11 +17,16 @@
     <h1>Playlist Converter</h1>
     <label for="playlistUrl">Paste YouTube or Spotify Playlist URL:</label>
     <input type="text" id="playlistUrl" />
-    <button onclick="convertPlaylist()">Convert Playlist</button>
+    <!-- Update onclick attribute to log the URL -->
+    <button onclick="handleButtonClick()">Convert Playlist</button>
 
-    <!-- Display the result container with the generated URL -->
-    <div id="conversionResult"></div>
-
+    <script>
+        function handleButtonClick() {
+            const playlistUrl = document.getElementById('playlistUrl').value;
+            console.log(`Button pressed with URL: ${playlistUrl}`);
+            convertPlaylist();
+        }
+    </script>
 </body>
 
 </html>
