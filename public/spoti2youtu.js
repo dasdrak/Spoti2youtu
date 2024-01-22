@@ -1,10 +1,10 @@
 console.log('Inside spoti2youtu.js');
 
 // Set up Youtube and Spotify API
-const youtubeApiKey = 'MY_YOUTUBE_API_KEY';
-const spotifyClientId = 'MY_SPOTIFY_CLIENT_ID';
-const spotifyClientSecret = 'MY_SPOTIFY_CLIENT_SECRET';
-const spotifyRedirectUri = 'MY_SPOTIFY_REDIRECT_URI';
+const youtubeApiKey = process.env.YOUTUBE_API_KEY;
+const spotifyClientId = process.env.YOUTUBE_CLIENT_ID;
+const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const spotifyRedirectUri = process.env.SPOTIFY_REDIRECT_URI;
 
 // Initialize Spotify API
 
@@ -13,9 +13,68 @@ const spotifyApi = new SpotifyWebApi({
     clientSecret: spotifyClientSecret,
     redirectUri: spotifyRedirectUri,
 });
+
+// Get an access token using the client credentials flow
+spotifyApi.clientCredentialsGrant().then(
+    function(data) {
+        console.log('Access Token:', data.body['access_token']);
+        // Set the access token on the API object
+        spotifyApi.setAccessToken(data.body['access_token']);
+
+        // Replace 'playlistId' with the actual ID of the playlist you want to fetch
+        const playlistId = 'your-playlist-id';
+
+        // Use the Spotify API to get playlist tracks
+        spotifyApi.getPlaylistTracks(playlistId).then(
+            function(data) {
+                // Iterate through the tracks and log the artist and track name
+                data.items.forEach(function(track) {
+                    const artist = track.track.artists[0].name;
+                    const songName = track.track.name;
+                    console.log('Artist:', artist, 'Song Name:', songName);
+                });
+            },
+            function(err) {
+                console.error('Error getting playlist tracks:', err);
+            }
+        );
+    },
+    function(err) {
+        console.error('Error getting access token:', err);
+    }
+);
+
 // Check if the Spotify API is authenticated
 console.log('Is Spotify API authenticated:', spotifyApi.getAccessToken() !== null);
+// Get an access token using the client credentials flow
+spotifyApi.clientCredentialsGrant().then(
+    function(data) {
+        console.log('Access Token:', data.body['access_token']);
+        // Set the access token on the API object
+        spotifyApi.setAccessToken(data.body['access_token']);
 
+        // Replace 'playlistId' with the actual ID of the playlist you want to fetch
+        const playlistId = 'your-playlist-id';
+
+        // Use the Spotify API to get playlist tracks
+        spotifyApi.getPlaylistTracks(playlistId).then(
+            function(data) {
+                // Iterate through the tracks and log the artist and track name
+                data.items.forEach(function(track) {
+                    const artist = track.track.artists[0].name;
+                    const songName = track.track.name;
+                    console.log('Artist:', artist, 'Song Name:', songName);
+                });
+            },
+            function(err) {
+                console.error('Error getting playlist tracks:', err);
+            }
+        );
+    },
+    function(err) {
+        console.error('Error getting access token:', err);
+    }
+);
 // Initialize YouTube API
 gapi.load('client', initYoutubeApi);
 
